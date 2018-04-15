@@ -8,6 +8,5 @@ public class AnswerDTO  {
     private Integer id;
     private String userId;
     private Integer number;
-    private String
     private String content;
 }

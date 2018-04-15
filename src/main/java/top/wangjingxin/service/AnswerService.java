@@ -4,9 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.wangjingxin.base.Result;
 import top.wangjingxin.dao.AnswerDao;
+import top.wangjingxin.model.dto.AnswerDTO;
 import top.wangjingxin.util.Page;
 
+import static top.wangjingxin.cache.ResultCache.getCache;
 import static top.wangjingxin.cache.ResultCache.getDataOk;
+import static top.wangjingxin.config.AppConfig.MARK_MAP;
+import static top.wangjingxin.util.SessionUtil.user;
 
 @Service
 public class AnswerService {
@@ -36,7 +40,21 @@ public class AnswerService {
         return getDataOk(answerDao.getByUserCount(id));
     }
 
-    public Result publish(String slug, String content) {
-        if()
+    public Result publish(AnswerDTO answerDTO) {
+        answerDTO.setUserId(user());
+        int count = answerDao.queryCount(answerDTO);
+        int insert = answerDao.insert(answerDTO);
+        if(count==0&&insert==1){
+            answerDao.day(answerDTO.getUserId(),getMark(answerDao.getMark(answerDTO.getNumber())));
+        }
+        return getCache(insert);
+    }
+
+    private int getMark(int mark) {
+        return MARK_MAP.get(mark);
+    }
+
+    public Result query(String slug) {
+        
     }
 }

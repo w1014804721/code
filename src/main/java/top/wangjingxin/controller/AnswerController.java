@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.wangjingxin.base.Result;
+import top.wangjingxin.model.dto.AnswerDTO;
 import top.wangjingxin.service.AnswerService;
 import top.wangjingxin.util.Page;
 
@@ -46,7 +47,12 @@ public class AnswerController {
     }
 
     @PostMapping("publish")
-    public Result publish(String slug,String content) {
-        return answerService.publish(slug,content);
+    public Result publish(AnswerDTO answerDTO) {
+        return answerService.publish(answerDTO);
+    }
+
+    @PostMapping("query")
+    public Result query(String slug) {
+        return answerService.query(slug);
     }
 }

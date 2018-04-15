@@ -5,6 +5,7 @@ import top.wangjingxin.dao.ConfigDao;
 import top.wangjingxin.model.TokenDate;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -16,11 +17,14 @@ public class AppConfig {
     public static volatile String HOST = null;
     private static ConfigDomain configDomain = null;
     public static Map<String, TokenDate> TOKEN_MAP = new ConcurrentHashMap<>();
-
+    public static Map<Integer,Integer> MARK_MAP = new HashMap<>();
     @PostConstruct
     public void config() {
         configDomain = configDao.config();
         ROOT = configDomain.getRoot();
         HOST = configDomain.getHost();
+        MARK_MAP.put(1,1);
+        MARK_MAP.put(2,2);
+        MARK_MAP.put(3,5);
     }
 }

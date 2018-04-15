@@ -93,7 +93,7 @@
     req:
         slug url拼接
     resp:
-        number 题号
+        id 题号
         title 标题
         content 内容
         difficulty 难度

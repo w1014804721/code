@@ -2,6 +2,7 @@ package top.wangjingxin.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import top.wangjingxin.model.dto.AnswerDTO;
 import top.wangjingxin.model.vo.AnswerVO;
 import top.wangjingxin.util.Page;
 
@@ -20,4 +21,12 @@ public interface AnswerDao {
     int getByTitleCount(String title);
 
     int getByUserCount(String id);
+
+    int queryCount(AnswerDTO answerDTO);
+
+    int insert(AnswerDTO answerDTO);
+
+    int getMark(Integer number);
+
+    int day(@Param("userId") String userId,@Param("mark") int mark);
 }
