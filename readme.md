@@ -36,7 +36,9 @@
         mail 邮箱
         password 密码
     resp:
-        id 用户id
+        id 用户id (登陆成功)
+        error0 (没有通过邮箱验证)
+        error1 (用户名或密码错误)
 #### 用户的基本信息
     url:info[get]
     req:

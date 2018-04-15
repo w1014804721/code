@@ -10,8 +10,12 @@ public class AppConfig {
     ConfigDao configDao;
     public static final Integer MAX_ROWS = 100;
     public static volatile String ROOT = null;
+    public static volatile String HOST = null;
+    private static ConfigDomain configDomain = null;
     @PostConstruct
     public void config(){
-        ROOT = configDao.root();
+        configDomain = configDao.config();
+        ROOT = configDomain.getRoot();
+        HOST = configDomain.getHost();
     }
 }

@@ -7,7 +7,7 @@ import java.util.UUID;
  * 请关注一下他的个人博客 wangjingxin.top
  */
 public class UuidUtil {
-    public static String Uuid(){
+    public static String uuid(){
         return UUID.randomUUID().toString().replaceAll("-","");
     }
 }
