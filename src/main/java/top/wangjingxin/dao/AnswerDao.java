@@ -3,7 +3,9 @@ package top.wangjingxin.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import top.wangjingxin.model.dto.AnswerDTO;
+import top.wangjingxin.model.dto.QuestionDTO;
 import top.wangjingxin.model.vo.AnswerVO;
+import top.wangjingxin.model.vo.QuestionVO;
 import top.wangjingxin.util.Page;
 
 import java.util.List;
@@ -29,4 +31,8 @@ public interface AnswerDao {
     int getMark(Integer number);
 
     int day(@Param("userId") String userId,@Param("mark") int mark);
+
+    QuestionVO query(String slug);
+
+    int insertQuestion(QuestionDTO dto);
 }

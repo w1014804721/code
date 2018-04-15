@@ -9,6 +9,11 @@
         insert into integral (id, date, integral) value (#{userId}, CURDATE(), #{mark})
         on duplicate key update integral = integral + #{mark}
     </insert>
+    <insert id="insertQuestion">
+        insert into question (id, title, slug, content, difficulty, tags)
+            value (#{id}, #{title}, #{slug}, #{content}, #{difficulty}, #{tags})
+        on duplicate key update id = VALUE(id)
+    </insert>
     <select id="get" resultType="top.wangjingxin.model.vo.AnswerVO">
         select
             A.id,
@@ -107,5 +112,15 @@
         select difficulty
         from question
         where id = #{id}
+    </select>
+    <select id="query" resultType="top.wangjingxin.model.vo.QuestionVO">
+        select
+            id,
+            title,
+            content,
+            difficulty,
+            tags
+        from question
+        where slug = #{slug}
     </select>
 </mapper>

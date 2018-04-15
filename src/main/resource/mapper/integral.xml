@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.wangjingxin.dao.IntegralDao">
+
+    <select id="day" resultType="top.wangjingxin.model.vo.RankVO">
+        select
+            A.id
+            u.nickName,
+            A.integral count
+        from (select
+                  id,
+                  integral
+              from integral
+              where date = CURDATE()
+              order by integral ${type} limit 10) A left join user u on u.id = A.id
+    </select>
+    <select id="all" resultType="top.wangjingxin.model.vo.RankVO">
+        select
+            id,
+            nickName,
+            intergral count
+        from user
+        order by intergral ${type} limit 10
+    </select>
+    <select id="check" resultType="top.wangjingxin.model.vo.RankVO">
+        select
+            id,
+            nickName,
+            intergral count
+        from user
+        order by continuous ${type} limit 10
+    </select>
+</mapper>
