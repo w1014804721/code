@@ -8,6 +8,7 @@
     integral 总积分
     aims 目标积分
     check 是否签到
+    continuous 连续签到天数
 #### 当日积分表 integral
     id 用户id
     date 日期
@@ -22,7 +23,7 @@
 #### 题目表 question
     id 题目编号
     title 标题
-    slug url拼   接
+    slug url拼接
     content 内容
     difficulty 难度
     tags 标签
