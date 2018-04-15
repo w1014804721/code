@@ -49,7 +49,7 @@
         check 是否签到
         integral 总积分
         day 今日积分
-        continuous
+        continuous 连续签到天数
 #### 签到 只有今日得分达到了目标才可以签到
     url:check[post]
     req:
@@ -85,7 +85,7 @@
 #### 发布题解 注意，同一个用户发布相同题解的题目只算一次积分
     url:publish[post]
     req;
-        slug url拼接
+        number 题号
         content 内容
     resp:
 #### 获取题目内容
@@ -93,6 +93,7 @@
     req:
         slug url拼接
     resp:
+        number 题号
         title 标题
         content 内容
         difficulty 难度

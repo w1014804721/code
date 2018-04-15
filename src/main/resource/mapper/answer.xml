@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.wangjingxin.dao.AnswerDao">
+    <select id="get" resultType="top.wangjingxin.model.vo.AnswerVO">
+        select
+            A.id,
+            A.userId,
+            u.nickName,
+            A.number,
+            A.date,
+            A.mark,
+            q.title,
+            q.slug,
+            q.difficulty,
+            q.tags
+        from (select
+                  id,
+                  userId,
+                  `number`,
+                  date,
+                  mark
+              from answer
+              where id &lt; #{offsets}
+              order by id desc
+              limit #{rows}) A
+            left join question q on q.id = A.number
+            left join user u on u.id = A.userId
+    </select>
+    <select id="getByTitle" resultType="top.wangjingxin.model.vo.AnswerVO">
+        select
+            A.id,
+            A.userId,
+            u.nickName,
+            A.number,
+            A.date,
+            A.mark,
+            q.title,
+            q.slug,
+            q.difficulty,
+            q.tags
+        from (select
+                  id,
+                  userId,
+                  `number`,
+                  date,
+                  mark
+              from answer
+              where id &lt; #{p.offsets}
+              order by id desc) A
+            join question q on q.id = A.number AND q.title = #{t}
+            join user u on u.id = A.userId
+        limit #{p.rows}
+    </select>
+    <select id="getByUser" resultType="top.wangjingxin.model.vo.AnswerVO">
+        select
+            A.id,
+            A.userId,
+            u.nickName,
+            A.number,
+            A.date,
+            A.mark,
+            q.title,
+            q.slug,
+            q.difficulty,
+            q.tags
+        from (select
+                  id,
+                  userId,
+                  `number`,
+                  date,
+                  mark
+              from answer
+              where id &lt; #{p.offsets} AND userId = #{id}
+              order by id desc
+              limit #{p.rows}) A
+            left join question q on q.id = A.number
+            left join user u on u.id = A.userId
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(1)
+        from answer
+    </select>
+    <select id="getByTitleCount" resultType="java.lang.Integer">
+        select count(1)
+        from answer a
+        join question q on a.number = q.id AND q.title = #{title}
+    </select>
+    <select id="getByUserCount" resultType="java.lang.Integer">
+        select count(1)
+        from answer
+        where userId = #{id}
+    </select>
+</mapper>

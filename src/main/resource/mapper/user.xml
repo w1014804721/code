@@ -5,9 +5,42 @@
         insert into user (id, nickName, mail, date, password, aims)
             value (#{id}, #{nickName}, #{mail}, #{date}, #{password}, #{aims})
     </insert>
+    <update id="certified">
+        update user
+        set certified = 1
+        where id = #{id}
+    </update>
+    <update id="check">
+        update user
+        set `check` = 1,
+            continuous = continuous + 1
+        where id = #{id}
+    </update>
     <select id="exist" resultType="java.lang.Integer">
         select count(1)
         from user
         where mail = #{mail}
+    </select>
+    <select id="login" resultType="top.wangjingxin.model.to.LoginTO">
+        select
+            id,
+            password,
+            date,
+            certified
+        from user
+        where mail = #{mail}
+    </select>
+    <select id="info" resultType="top.wangjingxin.model.vo.UserVO">
+        select
+            nickName,
+            aims,
+            `check`,
+            intergral,
+            i.integral day,
+            continuous
+        from user u left join integral i
+                on u.id = #{id} AND i.id = u.id AND i.date =  CURDATE()
+        where id = #{id}
+
     </select>
 </mapper>

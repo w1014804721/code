@@ -19,7 +19,7 @@ public class ResultCache {
         if (type == 0) return FAILURE;
         if (type == 1) return OK;
         if (type == 3) return PERMISSION_DENIED;
-        return null;
+        return FAILURE;
     }
 
     public static Result getDataFail(String message) {

@@ -23,4 +23,24 @@ public class UserController {
     public Result register(UserDTO user) {
         return userService.register(user);
     }
+
+    @PostMapping("login")
+    public Result login(String mail,String password) {
+        return userService.login(mail,password);
+    }
+
+    @GetMapping("verification")
+    public Result verification(String token) {
+        return userService.verification(token);
+    }
+
+    @GetMapping("info")
+    public Result info(String id) {
+        return userService.info(id);
+    }
+
+    @PostMapping("check")
+    public Result check() {
+        return userService.check();
+    }
 }
