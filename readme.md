@@ -16,11 +16,12 @@
     6、静态资源问题：URL统一前缀为 /resource/
 ## 接口定义
 ### 用户相关 /api/v1/user
-####　验证是否注册
+#### 验证是否注册
     url:exist[get]
     req:
         mail 邮箱
     resp:
+
 #### 注册
     url:register[post]
     req:
