@@ -5,6 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.wangjingxin.base.Result;
 import top.wangjingxin.dao.UserDao;
 import top.wangjingxin.model.dto.UserDTO;
@@ -39,6 +40,7 @@ public class UserService {
         return getCache(userDao.exist(mail));
     }
 
+    @Transactional
     public Result register(UserDTO user) {
         if (!OK.equals(exist(user.getMail()))) {
             return FAILURE;
@@ -79,6 +81,7 @@ public class UserService {
         poolTaskExecutor.execute(() -> javaMailSender.send(mailMessage));
     }
 
+    @Transactional
     public Result verification(String token) {
         if (userDao.certified(TOKEN_MAP.get(token).getId()) == 1) {
             TOKEN_MAP.remove(token);
@@ -91,6 +94,7 @@ public class UserService {
         return getDataOk(userDao.info(id));
     }
 
+    @Transactional
     public Result check() {
         UserVO vo = (UserVO) info(user()).getData();
         if(vo.getCheck()==0&&vo.getAims()<=vo.getDay()){

@@ -5,6 +5,12 @@
         insert into user (id, nickName, mail, date, password, aims)
             value (#{id}, #{nickName}, #{mail}, #{date}, #{password}, #{aims})
     </insert>
+    <insert id="add">
+        update user u
+            join integral i on i.id = u.id AND i.date = (curdate() + INTERVAL -1 DAY)
+        set u.`check`   = 0,
+            u.intergral = u.intergral + i.integral
+    </insert>
     <update id="certified">
         update user
         set certified = 1
@@ -12,9 +18,9 @@
     </update>
     <update id="check">
         update user
-        set `check` = 1,
+        set `check`    = 1,
             continuous = continuous + 1
-        where id = #{id}
+        where id = #{id} AND `check` = 0
     </update>
     <select id="exist" resultType="java.lang.Integer">
         select count(1)
@@ -39,8 +45,20 @@
             i.integral day,
             continuous
         from user u left join integral i
-                on u.id = #{id} AND i.id = u.id AND i.date =  CURDATE()
+                on u.id = #{id} AND i.id = u.id AND i.date = CURDATE()
         where id = #{id}
 
+    </select>
+    <select id="queryAllUser" resultType="top.wangjingxin.model.to.UserTO">
+        select
+            id,
+            mail,
+            nickName
+        from user
+    </select>
+    <select id="queryDo" resultType="java.lang.Integer">
+        select count(1)
+        from answer
+        where id = #{id} AND date &gt;= (curdate() + INTERVAL -3 DAY)
     </select>
 </mapper>
