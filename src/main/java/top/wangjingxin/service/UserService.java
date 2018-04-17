@@ -7,6 +7,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.wangjingxin.base.Result;
+import top.wangjingxin.base.Success;
 import top.wangjingxin.dao.UserDao;
 import top.wangjingxin.model.dto.UserDTO;
 import top.wangjingxin.model.to.LoginTO;
@@ -37,7 +38,7 @@ public class UserService {
         if (!RegexUtil.mail(mail)) {
             return FAILURE;
         }
-        return getCache(userDao.exist(mail));
+        return getDataOk(Success.getSuccess(userDao.exist(mail)));
     }
 
     @Transactional
