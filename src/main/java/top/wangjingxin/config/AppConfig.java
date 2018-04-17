@@ -1,6 +1,7 @@
 package top.wangjingxin.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import top.wangjingxin.dao.ConfigDao;
 import top.wangjingxin.model.TokenDate;
 
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Component
 public class AppConfig {
     @Autowired
     ConfigDao configDao;
