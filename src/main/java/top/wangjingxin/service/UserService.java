@@ -60,17 +60,17 @@ public class UserService {
 
     public Result login(String mail, String password) {
         LoginTO to = userDao.login(mail);
-        if (to == null || to.getPassword().equals(getSha256(password + to.getDate() + to.getId()))) {
-            return getDataFail("error1");
+        if (to == null || !to.getPassword().equals(getSha256(password + to.getDate() + to.getId()))) {
+            return getDataFail("用户名或密码错误");
         }
         if (to.getCertified() == 0) {
             String token = getSha256(uuid()) + getSha256(uuid());
             TOKEN_MAP.put(token, get(to.getId()));
             send(mail, token);
-            return getDataFail("error0");
+            return getDataFail("未激活，请进入邮箱激活此账号");
         }
-        setAttribute("id",to.getId());
-        return getDataOk(to.getId());
+        setAttribute("id", to.getId());
+        return getDataOk(info(to.getId()));
     }
 
     private void send(String mail, String token) {
@@ -98,7 +98,7 @@ public class UserService {
     @Transactional
     public Result check() {
         UserVO vo = (UserVO) info(user()).getData();
-        if(vo.getCheck()==0&&vo.getAims()<=vo.getDay()){
+        if (vo.getCheck() == 0 && vo.getAims() <= vo.getDay()) {
             return getCache(userDao.check(user()));
         }
         return FAILURE;
