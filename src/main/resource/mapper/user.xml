@@ -46,8 +46,6 @@
             continuous
         from user u left join integral i
                 on u.id = #{id} AND i.id = u.id AND i.date = CURDATE()
-        where id = #{id}
-
     </select>
     <select id="queryAllUser" resultType="top.wangjingxin.model.to.UserTO">
         select
