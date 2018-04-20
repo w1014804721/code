@@ -70,7 +70,7 @@ public class UserService {
             return getDataFail("未激活，请进入邮箱激活此账号");
         }
         setAttribute("id", to.getId());
-        return getDataOk(info(to.getId()));
+        return info(to.getId());
     }
 
     private void send(String mail, String token) {
