@@ -126,7 +126,7 @@
     </dependencies>
 
     <build>
-        <finalName>aipage</finalName>
+        <finalName>code</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
