@@ -24,7 +24,5 @@ public interface UserDao {
 
     List<UserTO> queryAllUser();
 
-    int queryDo(String id);
-
     int add();
 }

@@ -26,11 +26,13 @@ public class TasksDay {
     @Scheduled(cron = "0 0 0 * * ?")
     @Transactional
     public void everyDay() {
-        List<UserTO> users = userDao.queryAllUser();
-        users.stream().filter(to -> userDao.queryDo(to.getId()) == 0).forEach(this::send);
         userDao.add();
     }
-
+    @Scheduled(cron = "0 0 18 * * ?")
+    @Transactional
+    public void send(){
+        userDao.queryAllUser().forEach(this::send);
+    }
     private void send(UserTO to) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setFrom("ingzonecode@163.com");
