@@ -58,7 +58,7 @@
                   date,
                   mark
               from answer
-              /*where id &lt; #{p.offsets}*/
+              <!--where id &lt; #{p.offsets} -->
               order by id desc limit #{p.page},#{p.rows}) A
             join question q on q.id = A.number AND q.title = #{t}
             join user u on u.id = A.userId
