@@ -16,6 +16,7 @@ import top.wangjingxin.util.RegexUtil;
 
 import java.sql.Timestamp;
 
+import static top.wangjingxin.base.Success.SUCCESS;
 import static top.wangjingxin.cache.ResultCache.*;
 import static top.wangjingxin.config.AppConfig.HOST;
 import static top.wangjingxin.config.AppConfig.TOKEN_MAP;
@@ -43,7 +44,7 @@ public class UserService {
 
     @Transactional
     public Result register(UserDTO user) {
-        if (!OK.equals(exist(user.getMail()))) {
+        if (SUCCESS.equals(exist(user.getMail()).getData()) || SUCCESS.equals(name(user.getNickName()).getData())) {
             return FAILURE;
         }
         user.setId(uuid());
@@ -104,5 +105,9 @@ public class UserService {
             return getCache(userDao.check(user()));
         }
         return FAILURE;
+    }
+
+    public Result name(String name) {
+        return getDataOk(Success.getSuccess(userDao.name(name)));
     }
 }

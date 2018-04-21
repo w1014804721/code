@@ -19,6 +19,10 @@ public class UserController {
         return userService.exist(mail);
     }
 
+    @GetMapping("name")
+    public Result name(String name) {
+        return userService.name(name);
+    }
     @PostMapping("register")
     public Result register(UserDTO user) {
         return userService.register(user);

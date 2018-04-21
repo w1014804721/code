@@ -57,4 +57,9 @@
         group by u.id,u.mail,u.nickName
         HAVING count(a.date) = 0
     </select>
+    <select id="name" resultType="java.lang.Integer">
+        select count(1)
+        from user
+        where nickName = #{name}
+    </select>
 </mapper>
