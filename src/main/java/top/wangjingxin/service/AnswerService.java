@@ -14,9 +14,7 @@ import top.wangjingxin.model.dto.QuestionDTO;
 import top.wangjingxin.model.vo.QuestionVO;
 import top.wangjingxin.util.Page;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 
 import static java.lang.Integer.parseInt;
@@ -65,9 +63,9 @@ public class AnswerService {
             if (count == 0) {
                 answerDao.day(answerDTO.getUserId(), getMark(answerDao.getMark(answerDTO.getNumber())));
             }
-            try (FileWriter fw = new FileWriter(ROOT + File.separator + "html" + File.separator + answerDTO.getId() + ".html")) {
-                fw.write(new PegDownProcessor(Integer.MAX_VALUE).markdownToHtml(answerDTO.getContent()));
-                fw.flush();
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("ROOT + File.separator + \"html\" + File.separator + answerDTO.getId() + \".html\""))))) {
+                bw.write(new PegDownProcessor(Integer.MAX_VALUE).markdownToHtml(answerDTO.getContent()));
+                bw.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -117,9 +115,5 @@ public class AnswerService {
 
     private Integer getLevel(String difficulty) {
         return LEVEL_MAP.get(difficulty);
-    }
-
-    public static void main(String[] args) {
-        System.out.println("https://leetcode.com/problems/median-of-two-sorted-arrays/description/");
     }
 }
