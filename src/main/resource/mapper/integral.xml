@@ -20,7 +20,7 @@
             nickName,
             intergral count
         from user
-        order by intergral ${t} limit 10
+        order by intergral desc limit 10
     </select>
     <select id="check" resultType="top.wangjingxin.model.vo.RankVO">
         select
@@ -28,6 +28,6 @@
             nickName,
             intergral count
         from user
-        order by continuous ${t} limit 10
+        order by continuous desc limit 10
     </select>
 </mapper>
