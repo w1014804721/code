@@ -33,9 +33,9 @@
                   date,
                   mark
               from answer
-              where id &lt; #{offsets}
+           <!--   where id &lt; #{offsets}-->
               order by id desc
-              limit #{rows}) A
+              limit #{page},#{rows}) A
             left join question q on q.id = A.number
             left join user u on u.id = A.userId
     </select>
@@ -58,11 +58,11 @@
                   date,
                   mark
               from answer
-              where id &lt; #{p.offsets}
+              /*where id &lt; #{p.offsets}*/
               order by id desc) A
             join question q on q.id = A.number AND q.title = #{t}
             join user u on u.id = A.userId
-        limit #{p.rows}
+        limit #{p.page},#{p.rows}
     </select>
     <select id="getByUser" resultType="top.wangjingxin.model.vo.AnswerVO">
         select
@@ -83,9 +83,9 @@
                   date,
                   mark
               from answer
-              where id &lt; #{p.offsets} AND userId = #{id}
+               <!--where id &lt; #{p.offsets} AND userId = #{id}-->
               order by id desc
-              limit #{p.rows}) A
+              limit #{p.page},#{p.rows}) A
             left join question q on q.id = A.number
             left join user u on u.id = A.userId
     </select>
