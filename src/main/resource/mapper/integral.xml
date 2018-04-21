@@ -12,7 +12,7 @@
                   integral
               from integral
               where date = CURDATE()
-              order by integral ${type} limit 10) A left join user u on u.id = A.id
+              order by integral ${t} limit 10) A left join user u on u.id = A.id
     </select>
     <select id="all" resultType="top.wangjingxin.model.vo.RankVO">
         select
@@ -20,7 +20,7 @@
             nickName,
             intergral count
         from user
-        order by intergral ${type} limit 10
+        order by intergral ${t} limit 10
     </select>
     <select id="check" resultType="top.wangjingxin.model.vo.RankVO">
         select
@@ -28,6 +28,6 @@
             nickName,
             intergral count
         from user
-        order by continuous ${type} limit 10
+        order by continuous ${t} limit 10
     </select>
 </mapper>

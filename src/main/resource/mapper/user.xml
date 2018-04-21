@@ -50,10 +50,12 @@
     </select>
     <select id="queryAllUser" resultType="top.wangjingxin.model.to.UserTO">
         select
-            id,
+            u.id,
             mail,
             nickName
-        from user
+        from user u join answer a on u.id = a.userId AND a.date &gt;= (curdate() + INTERVAL -3 DAY)
+        group by u.id,u.mail,u.nickName
+        HAVING count(a.date) = 0
     </select>
     <select id="queryDo" resultType="java.lang.Integer">
         select count(1)
