@@ -59,10 +59,9 @@
                   mark
               from answer
               /*where id &lt; #{p.offsets}*/
-              order by id desc) A
+              order by id desc limit #{p.page},#{p.rows}) A
             join question q on q.id = A.number AND q.title = #{t}
             join user u on u.id = A.userId
-        limit #{p.page},#{p.rows}
     </select>
     <select id="getByUser" resultType="top.wangjingxin.model.vo.AnswerVO">
         select
