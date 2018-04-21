@@ -70,13 +70,13 @@
         difficulty 难度
         tags 标签
 #### 查看某道题目的题解
-    url:getByTitle
+    url:getByTitle[get]
     req:
         title 标题
     resp:
         同get接口
 #### 查看某人的题解
-    url:getByUser
+    url:getByUser[get]
     req:
         userId 用户id
     resp:
@@ -89,7 +89,7 @@
         content 内容
     resp:
 #### 获取题目内容
-    url:query[get]
+    url:query[post]
     req:
         slug url拼接
     resp:
