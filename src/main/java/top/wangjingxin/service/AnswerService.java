@@ -80,7 +80,11 @@ public class AnswerService {
     @Transactional
     public Result query(String slug) {
         String[] ss = slug.split("/");
-        slug = ss[ss.length - 2];
+        if ("description".equals(ss[ss.length - 1])) {
+            slug = ss[ss.length - 2];
+        } else {
+            slug = ss[ss.length - 1];
+        }
         QuestionVO vo = answerDao.query(slug);
         if (vo == null) {
             QuestionDTO dto = getQuestion(slug);
