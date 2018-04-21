@@ -38,6 +38,7 @@
               limit #{page},#{rows}) A
             left join question q on q.id = A.number
             left join user u on u.id = A.userId
+            order by A.id desc
     </select>
     <select id="getByTitle" resultType="top.wangjingxin.model.vo.AnswerVO">
         select
@@ -62,6 +63,7 @@
               order by id desc limit #{p.page},#{p.rows}) A
             join question q on q.id = A.number AND q.title = #{t}
             join user u on u.id = A.userId
+            order by A.id desc
     </select>
     <select id="getByUser" resultType="top.wangjingxin.model.vo.AnswerVO">
         select
@@ -87,6 +89,7 @@
               limit #{p.page},#{p.rows}) A
             left join question q on q.id = A.number
             left join user u on u.id = A.userId
+            order by A.id desc
     </select>
     <select id="getCount" resultType="java.lang.Integer">
         select count(1)
