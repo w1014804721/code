@@ -12,7 +12,7 @@
     <insert id="insertQuestion">
         insert into question (id, title, slug, content, difficulty, tags)
             value (#{id}, #{title}, #{slug}, #{content}, #{difficulty}, #{tags})
-        on duplicate key update id = VALUE(id)
+        on duplicate key update id = VALUES(id)
     </insert>
     <select id="get" resultType="top.wangjingxin.model.vo.AnswerVO">
         select
