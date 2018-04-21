@@ -63,7 +63,7 @@ public class AnswerService {
             if (count == 0) {
                 answerDao.day(answerDTO.getUserId(), getMark(answerDao.getMark(answerDTO.getNumber())));
             }
-            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(ROOT + File.separator + "html" + File.separator + answerDTO.getId() + ".html"))))) {
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(ROOT + File.separator + "html" + File.separator + answerDTO.getId() + ".html")),"utf8"))) {
                 bw.write(new PegDownProcessor(Integer.MAX_VALUE).markdownToHtml(answerDTO.getContent()));
                 bw.flush();
             } catch (IOException e) {
