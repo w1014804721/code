@@ -12,7 +12,7 @@
                   integral
               from integral
               where date = CURDATE()
-              order by integral ${t} limit 10) A left join user u on u.id = A.id
+              order by integral desc limit 10) A left join user u on u.id = A.id
     </select>
     <select id="all" resultType="top.wangjingxin.model.vo.RankVO">
         select
