@@ -61,8 +61,10 @@ public class AnswerService {
         answerDTO.setUserId(user());
         int count = answerDao.queryCount(answerDTO);
         int insert = answerDao.insert(answerDTO);
-        if (count == 0 && insert == 1) {
-            answerDao.day(answerDTO.getUserId(), getMark(answerDao.getMark(answerDTO.getNumber())));
+        if (insert == 1) {
+            if (count == 0) {
+                answerDao.day(answerDTO.getUserId(), getMark(answerDao.getMark(answerDTO.getNumber())));
+            }
             try (FileWriter fw = new FileWriter(ROOT + File.separator + "html" + File.separator + answerDTO.getId() + ".html")) {
                 fw.write(new PegDownProcessor(Integer.MAX_VALUE).markdownToHtml(answerDTO.getContent()));
                 fw.flush();
@@ -79,6 +81,8 @@ public class AnswerService {
 
     @Transactional
     public Result query(String slug) {
+        String[] ss = slug.split("/");
+        slug = ss[ss.length - 2];
         QuestionVO vo = answerDao.query(slug);
         if (vo == null) {
             QuestionDTO dto = getQuestion(slug);
@@ -115,4 +119,7 @@ public class AnswerService {
         return LEVEL_MAP.get(difficulty);
     }
 
+    public static void main(String[] args) {
+        System.out.println("https://leetcode.com/problems/median-of-two-sorted-arrays/description/");
+    }
 }

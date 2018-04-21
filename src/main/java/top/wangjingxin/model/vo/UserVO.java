@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserVO {
+    private String id;
     private String nickName;
     private Integer aims;
     private Integer check;

@@ -4,7 +4,7 @@
 
     <select id="day" resultType="top.wangjingxin.model.vo.RankVO">
         select
-            A.id
+            A.id,
             u.nickName,
             A.integral count
         from (select

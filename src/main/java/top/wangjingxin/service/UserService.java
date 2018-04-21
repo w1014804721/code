@@ -92,7 +92,9 @@ public class UserService {
     }
 
     public Result info(String id) {
-        return getDataOk(userDao.info(id));
+        UserVO vo = userDao.info(id);
+        vo.setId(id);
+        return getDataOk(vo);
     }
 
     @Transactional
