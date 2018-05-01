@@ -73,10 +73,6 @@ public class AnswerService {
         return getCache(insert);
     }
 
-    private int getMark(int mark) {
-        return MARK_MAP.get(mark);
-    }
-
     @Transactional
     public Result query(String slug) {
         String[] ss = slug.split("/");
@@ -92,6 +88,10 @@ public class AnswerService {
             vo = dto.getVO();
         }
         return getDataOk(vo);
+    }
+
+    private int getMark(int mark) {
+        return MARK_MAP.get(mark);
     }
 
     private QuestionDTO getQuestion(String slug) {

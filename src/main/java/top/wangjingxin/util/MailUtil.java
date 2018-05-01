@@ -2,6 +2,7 @@ package top.wangjingxin.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
@@ -32,5 +33,14 @@ public class MailUtil {
         poolTaskExecutor.setMaxPoolSize(10);
         poolTaskExecutor.setQueueCapacity(100);
         return poolTaskExecutor;
+    }
+
+    public static void main(String[] args) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("ingzonecode@163.com");
+        mailMessage.setTo("1014804721@qq.com");
+        mailMessage.setSubject("温馨提示");
+        mailMessage.setText("尊敬的" + "aaa" + "山东大学ING工作室提醒您，你已经超过三天没有刷题了.");
+        new MailUtil().get().send(mailMessage);
     }
 }

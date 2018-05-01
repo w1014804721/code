@@ -12,9 +12,4 @@ public class UserDTO {
     private Timestamp date;
     private String password;
     private Integer aims;
-    public void setAims(Integer aims){
-        if(aims==null||aims==0){
-            this.aims = 1;
-        }
-    }
 }

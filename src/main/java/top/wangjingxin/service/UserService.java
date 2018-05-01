@@ -44,6 +44,9 @@ public class UserService {
 
     @Transactional
     public Result register(UserDTO user) {
+        if(user.getAims()==null||user.getAims()<=0){
+            user.setAims(1);
+        }
         if (SUCCESS.equals(exist(user.getMail()).getData()) || SUCCESS.equals(name(user.getNickName()).getData())) {
             return FAILURE;
         }
